@@ -11,8 +11,8 @@ const Nav = () => {
 
     useEffect(() => {
         const setProviders = async () => {
-            const response = await getProviders();
-            setProviders(response)
+            const response = await getProviders(); // getProviders from Next.Js 13
+            setProviders(response) // then keep result in state
         }
         setProviders() // <-- Call here
     }, [])
