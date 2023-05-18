@@ -56,7 +56,17 @@ const Nav = () => {
 
                 // User Login = False / We use getProvider (User)
                         <>
-                            {}
+                            {providers &&
+                                Object.values(providers).map((provider) => (
+                                    <button 
+                                        type='button'
+                                        key={provider.name}
+                                        onClick={() => signIn(provider.id)}
+                                        className='black_btn'
+                                        >
+                                            Sign In
+                                    </button>
+                                ))}
                         </>
                 )}
             </div>
