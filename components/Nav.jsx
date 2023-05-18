@@ -6,8 +6,16 @@ import { useState , useEffect } from 'react' // render from Client side ( Use cl
 import { signIn , signOut , useSession , getProviders } from 'next-auth/react' // for user to  login and logout 
 const Nav = () => {
 
-    const isUserLoggedIn = true
+    const isUserLoggedIn = false
+    const [providers , setProviders] = useState(null) // This user not login yet = Empty 
 
+    useEffect(() => {
+        const setProviders = async () => {
+            const response = await getProviders();
+            setProviders(response)
+        }
+        setProviders() // <-- Call here
+    }, [])
     return (
 
         <nav className='w-full flex-between mb-16 pt-3 '>
@@ -19,26 +27,43 @@ const Nav = () => {
                     width={30} height={300}
                     alt="Promptopia Logo"
                     className='object-contain'/> 
+                <p className='logo_text'>Promptopia</p>
             </Link>
-            <p className='logo_text'> Promptopia</p>
 
 
-            {/* Mobile Navigation  */}
+            {/* Desktop Navigation */}
+        
             <div className='sm:flex hidden'>
+                {/* User Login = True   */}
                 {isUserLoggedIn ? (
-                
-                        <div className='flex  gap-3 md:gap-5'>
+                        <div className='flex gap-3 md:gap-5'>
                             <Link href="/create-prompt" className='black_btn'>
                                 Create Post
                             </Link>
+                            <button 
+                                type='button' 
+                                onClick={signOut} 
+                                className='outline_btn'> Sign Out </button>
+                            <Link href='/profile'>
+                                <Image 
+                                    src='/assets/images/logo.svg'
+                                    width={30} height={30}
+                                    alt='profile'
+                                    className='rounded-full'/>
+                            </Link>
                         </div>
-                    
-                ) : (
-                    <>
+                         ) : (
 
-                    </>
+                // User Login = False / We use getProvider (User)
+                        <>
+                            {}
+                        </>
                 )}
             </div>
+            {/* End Desktop Navigation */}
+
+            {/* Mobile Navigation */}
+          
 
         </nav>
   )
