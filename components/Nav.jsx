@@ -6,8 +6,9 @@ import { useState , useEffect } from 'react' // render from Client side ( Use cl
 import { signIn , signOut , useSession , getProviders } from 'next-auth/react' // for user to  login and logout 
 const Nav = () => {
 
-    const isUserLoggedIn = false
+    const isUserLoggedIn = true
     const [providers , setProviders] = useState(null) // This user not login yet = Empty 
+    const [toggleDropdown , setToggleDropdown] = useState(false)
 
     useEffect(() => {
         const setProviders = async () => {
@@ -16,10 +17,10 @@ const Nav = () => {
         }
         setProviders() // <-- Call here
     }, [])
+
     return (
 
         <nav className='w-full flex-between mb-16 pt-3 '>
-
 
             <Link href="/" className='flex gap-2 flex-center'> 
                 <Image 
@@ -30,9 +31,7 @@ const Nav = () => {
                 <p className='logo_text'>Promptopia</p>
             </Link>
 
-
             {/* Desktop Navigation */}
-        
             <div className='sm:flex hidden'>
                 {/* User Login = True   */}
                 {isUserLoggedIn ? (
@@ -53,7 +52,6 @@ const Nav = () => {
                             </Link>
                         </div>
                          ) : (
-
                 // User Login = False / We use getProvider (User)
                         <>
                             {providers &&
@@ -72,11 +70,54 @@ const Nav = () => {
             </div>
             {/* End Desktop Navigation */}
 
+
+
             {/* Mobile Navigation */}
+            <div className='sm:hidden flex relative'>
+                {isUserLoggedIn ? (
+                    <div className='flex'>
+                        <Image
+                            src="/assets/images/logo.svg"
+                            width={30}
+                            height={30}
+                            alt='Profile Image'
+                            className='rounded-full'
+                            onClick={() => {setToggleDropdown((prev) => !prev)}}
+                            />
+
+                        {toggleDropdown && (
+                            <div className='dropdown'>
+                              <Link
+                                href="/profile"
+                                className='dropdown_link'
+                                onClick={() => setToggleDropdown(false)}
+                                >
+                                 My Profile
+                              </Link>
+                            </div>
+                        )}
+                    </div>
+                    
+                  
+
+                ) : (
+                    <>
+                      {providers && value(providers).map(provider => (
+                        <button
+                            key={provider.name}
+                            type="button"
+                            onClick={() => signIn(provider.id)}
+                            >
+                            Sign In
+                        </button>
+                      ))}
+                      
+                    </>
+                )}
+            </div>
           
 
         </nav>
   )
 }
-
 export default Nav
