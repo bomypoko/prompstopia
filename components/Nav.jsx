@@ -4,6 +4,7 @@ import Link from 'next/link' // allow us to navigate to the other page
 import Image from 'next/image' // optimize images when loading 
 import { useState , useEffect } from 'react' // render from Client side ( Use client)
 import { signIn , signOut , useSession , getProviders } from 'next-auth/react' // for user to  login and logout 
+
 const Nav = () => {
 
     const isUserLoggedIn = true
@@ -74,6 +75,7 @@ const Nav = () => {
 
             {/* Mobile Navigation */}
             <div className='sm:hidden flex relative'>
+                {/* If User Already Logging In - Render this div  */}
                 {isUserLoggedIn ? (
                     <div className='flex'>
                         <Image
@@ -99,7 +101,7 @@ const Nav = () => {
                     </div>
                     
                   
-
+                // If User not login yet - there is a sign-in to btn lead user to the login page
                 ) : (
                     <>
                       {providers && value(providers).map(provider => (
