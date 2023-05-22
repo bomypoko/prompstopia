@@ -17,9 +17,11 @@ const handler = NextAuth({
         try{
 
         }catch (error) {
-            
+
         }
     }
 })
 
 export { handler as GET , handler as POST }
+
+
