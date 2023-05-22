@@ -37,16 +37,19 @@ const Nav = () => {
                 {/* User Login = True   */}
                 {isUserLoggedIn ? (
                         <div className='flex gap-3 md:gap-5'>
-                            <Link href="/create-prompt" className='black_btn'>
-                                Create Post
+                            <Link href="/create-prompt" 
+                                  className='black_btn'
+                                  > Create Post
                             </Link>
                             <button 
                                 type='button' 
                                 onClick={signOut} 
-                                className='outline_btn'> Sign Out </button>
+                                className='outline_btn'
+                                > Sign Out 
+                            </button>
                             <Link href='/profile'>
                                 <Image 
-                                    src='/assets/images/logo.svg'
+                                    src='/assets/images/logo.svg' // Will be user Image Profile 
                                     width={30} height={30}
                                     alt='profile'
                                     className='rounded-full'/>
@@ -74,6 +77,7 @@ const Nav = () => {
 
 
             {/* Mobile Navigation */}
+            
             <div className='sm:hidden flex relative'>
                 {/* If User Already Logging In - Render this div  */}
                 {isUserLoggedIn ? (
@@ -96,6 +100,23 @@ const Nav = () => {
                                 >
                                  My Profile
                               </Link>
+                              <Link
+                                href="/create-prompt"
+                                className='dropdown_link'
+                                onClick={() => setToggleDropdown(false)}
+                                >
+                                 Create Prompt
+                              </Link>
+                              <button
+                                type='button'
+                                onClick={() => {
+                                    setToggleDropdown(false)
+                                    signOut()
+                                }}
+                                className='mt-5 w-full black_btn'
+                                >
+                                Sign Out
+                              </button>
                             </div>
                         )}
                     </div>
