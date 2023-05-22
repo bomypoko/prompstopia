@@ -1,4 +1,4 @@
-// Layout File is an Important File Structure. the component will be use in side the Layout which call Children Components.
+// Layout File is an Important File Structure. the component will be use inside the Layout which call Children Components.
 
 import '@styles/globals.css';
 import Nav from '@components/Nav'
