@@ -1,6 +1,6 @@
 import { Schema , model , models  } from "mongoose"; // this will be interact with the mongoDB
 
-const UserSchema = newSchema({
+const UserSchema = new Schema({
     email: {
         type: 'String',
         unique: [true ,'Email already exists!'],

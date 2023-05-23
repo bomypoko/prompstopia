@@ -13,14 +13,20 @@ const handler = NextAuth({
         })
     ],
     async session({ session }) {
+        const sessionUser = await User.findOne({ 
+            email : session.user.email
+        })
 
+            session.user.id = sessionUser._id.toString();
+
+            return session;
     },
 
     // before getting get a user session , we need to sign in first
 
     async signIn ({profile}) {
         try{
-            
+
             await connectToDB();
             // check if the user is already exists
             const userExists = await User.findOne({
