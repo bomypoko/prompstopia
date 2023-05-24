@@ -9,7 +9,9 @@ const Nav = () => {
 
     // const isUserLoggedIn = true
     // rename data to session 
-    const { data: session} = useSession()
+    const { data: session } = useSession()
+
+    console.log(session)
 
    
 
@@ -44,7 +46,7 @@ const Nav = () => {
 
             {/* Desktop Navigation */}
             <div className='sm:flex hidden'>
-                {/* User Login = True   // replate data to session */}
+                {/* User Login = True   // replace data to session */}
                 {session?.user ? (
                         <div className='flex gap-3 md:gap-5'>
                             <Link href="/create-prompt" 
@@ -59,8 +61,8 @@ const Nav = () => {
                             </button>
                             <Link href='/profile'>
                                 <Image 
-                                    src='/assets/images/logo.svg' // Will be user Image Profile 
-                                    width={30} height={30}
+                                    src={session?.user.image} // Will be user Image Profile 
+                                    width={40} height={40}
                                     alt='profile'
                                     className='rounded-full'/>
                             </Link>
