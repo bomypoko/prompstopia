@@ -11,12 +11,7 @@ const Nav = () => {
     // rename data to session 
     const { data: session } = useSession()
 
-    console.log(session)
-
-   
-
-
-
+    
 
     const [providers , setProviders] = useState(null) // This user not login yet = Empty 
     const [toggleDropdown , setToggleDropdown] = useState(false)
@@ -27,16 +22,18 @@ const Nav = () => {
             setProviders(response) // then keep result in state
         }
         setUpProviders() // <-- Call here
+
+        
     }, [])
 
     return (
 
-        <nav className='w-full flex-between mb-16 pt-3 '>
+        <nav className='w-full flex-between mb-16 pt-3'>
 
             <Link href="/" className='flex gap-2 flex-center'> 
                 <Image 
                     src="/assets/images/logo.svg" 
-                    width={30} height={300}
+                    width={30} height={30}
                     alt="Promptopia Logo"
                     className='object-contain'/> 
                 <p className='logo_text'>Promptopia</p>
@@ -62,7 +59,7 @@ const Nav = () => {
                             <Link href='/profile'>
                                 <Image 
                                     src={session?.user.image} // Will be user Image Profile 
-                                    width={40} height={40}
+                                    width={30} height={30}
                                     alt='profile'
                                     className='rounded-full'/>
                             </Link>
