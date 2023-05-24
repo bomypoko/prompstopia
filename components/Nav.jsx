@@ -11,6 +11,10 @@ const Nav = () => {
     // rename data to session 
     const { data: session} = useSession()
 
+   
+
+
+
 
     const [providers , setProviders] = useState(null) // This user not login yet = Empty 
     const [toggleDropdown , setToggleDropdown] = useState(false)
@@ -36,7 +40,7 @@ const Nav = () => {
                 <p className='logo_text'>Promptopia</p>
             </Link>
 
-            {alert(providers)}
+            {/* {alert(providers)} */}
 
             {/* Desktop Navigation */}
             <div className='sm:flex hidden'>
@@ -94,7 +98,7 @@ const Nav = () => {
                 {session?.user ? (
                     <div className='flex'>
                         <Image
-                            src="/assets/images/logo.svg"
+                            src={session?.user?.image}
                             width={30}
                             height={30}
                             alt='Profile Image'
@@ -136,17 +140,20 @@ const Nav = () => {
                 // If User not login yet - there is a sign-in to btn lead user to the login page
                 ) : (
                     <>
-                      {providers && value(providers).map(provider => (
+                    {providers &&
+                      Object.values(providers).map((provider) => (
                         <button
-                            key={provider.name}
-                            type="button"
-                            onClick={() => signIn(provider.id)}
-                            >
-                            Sign In
+                          type='button'
+                          key={provider.name}
+                          onClick={() => {
+                            signIn(provider.id);
+                          }}
+                          className='black_btn'
+                        >
+                          Sign in
                         </button>
                       ))}
-                      
-                    </>
+                  </>
                 )}
             </div>
           
