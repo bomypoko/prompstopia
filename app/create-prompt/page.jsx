@@ -7,10 +7,9 @@ import Form from '@components/Form'
 
 const CreatePrompt = () => {
   const [submitting , setSubmitting] = useState(false)
-
-  const [post , setPost ] = useState({
+  const [post , setPost] = useState({
     title: "",
-    tag: ""
+    tag: "",
   })
 
   const createPrompt = async(e) => {
